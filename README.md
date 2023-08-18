@@ -7,7 +7,6 @@ This script allows you to easily download YouTube videos or audio using yt-dlp a
 Before using this script, ensure you have the following prerequisites installed:
 
 - Windows Operating System
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp): A command-line downloader for YouTube media
 - [curl](https://curl.se/): A command-line tool for downloading files from the internet
 - [FFmpeg](https://ffmpeg.org/): A powerful multimedia framework for processing audio and video
 
