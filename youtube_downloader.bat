@@ -16,7 +16,7 @@ if not exist "Youtube" (
 :: Check if yt-dlp is present in the "Youtube" subfolder or download it.
 if not exist "Youtube\%yt_dlp_filename%" (
     echo yt-dlp is not found in the "Youtube" subfolder. Downloading yt-dlp...
-    curl -L "%yt_dlp_url%" -o "Youtube\%yt_dlp_filename%"
+    curl -L "%yt_dlp_url%" -o "Youtube\%yt_dlp_filename%" --ssl-no-revoke
 )
 
 :: Specify the filename and URL for the ffmpeg zip file.
@@ -29,7 +29,7 @@ if "%download_location%"=="" set "download_location=Youtube"
 :: Check if ffmpeg is present in the specified folder or download and extract it.
 if not exist "%download_location%\ffmpeg.exe" (
     echo ffmpeg is not found in the specified folder. Downloading ffmpeg...
-    curl -L "%ffmpeg_zip_url%" -o "%download_location%\%ffmpeg_zip_filename%"
+    curl -L "%ffmpeg_zip_url%" -o "%download_location%\%ffmpeg_zip_filename%" --ssl-no-revoke
     echo Extracting ffmpeg...
     powershell -command "Expand-Archive -Path '%download_location%\%ffmpeg_zip_filename%' -DestinationPath '%download_location%'"
     
