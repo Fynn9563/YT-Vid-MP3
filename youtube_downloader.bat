@@ -19,6 +19,28 @@ if not exist "Youtube\%yt_dlp_filename%" (
     curl -L "%yt_dlp_url%" -o "Youtube\%yt_dlp_filename%"
 )
 
+:: Specify the filename and URL for the ffmpeg zip file.
+set "ffmpeg_zip_filename=ffmpeg-master-latest-win64-gpl.zip"
+set "ffmpeg_zip_url=https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip" 
+
+:: Set download location
+if "%download_location%"=="" set "download_location=Youtube"
+
+:: Check if ffmpeg is present in the specified folder or download and extract it.
+if not exist "%download_location%\ffmpeg.exe" (
+    echo ffmpeg is not found in the specified folder. Downloading ffmpeg...
+    curl -L "%ffmpeg_zip_url%" -o "%download_location%\%ffmpeg_zip_filename%"
+    echo Extracting ffmpeg...
+    powershell -command "Expand-Archive -Path '%download_location%\%ffmpeg_zip_filename%' -DestinationPath '%download_location%'"
+    
+    echo Copying ffmpeg.exe to the specified folder...
+    copy "%download_location%\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe" "%download_location%\ffmpeg.exe"
+    
+    echo Cleaning up...
+    del "%download_location%\%ffmpeg_zip_filename%"
+    rmdir /s /q "%download_location%\ffmpeg-master-latest-win64-gpl"
+)
+
 set /p "url=Enter the YouTube URL: "
 echo.
 
